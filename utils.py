@@ -5,8 +5,7 @@ import traceback
 from datetime import datetime, timedelta
 import mysql.connector
 from mysql.connector import Error
-from mysqladapter1 import \
-    check_runname, \
+from mysqladapter1 import \    
     check_id, \
     get_meta_data, \
     extract_timeseries, \
@@ -77,6 +76,7 @@ def map_curw_id(result):
                 #print("*******")
 
                 # insert the timeseries in obs_db
+                pool = get_Pool(host=CURW_OBS_HOST, port=CURW_OBS_PORT, user=CURW_OBS_USERNAME, password=CURW_OBS_PASSWORD, db=CURW_OBS_DATABASE)
                 insert_timeseries(pool=pool, timeseries=timeseries, tms_id=result, end_date=timeseries[-1][0])
 
 
